@@ -1,7 +1,8 @@
 
 # Write4 - ROP Emporium Walkthrough
 
-![ROP Emporium]
+Link: https://ropemporium.com/
+
 <a href="https://ropemporium.com/"><img src="0_ret2win/images/logo.jpg" alt="Logo" width="650"/></a>
 
 ## Introduction
