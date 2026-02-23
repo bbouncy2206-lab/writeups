@@ -1,7 +1,7 @@
 
 # Write4 - ROP Emporium Walkthrough
 
-![ROP Emporium](https://images.squarespace-cdn.com/content/v1/63cfe3238ae54d2a38ff6bad/4459abbb-00cd-466c-9311-32b53fdb2961/PWN2OWN-Icon-Reverse-3C-large.png)
+![ROP Emporium](https://github.com/NationalSecurityAgency/ghidra/blob/master/Ghidra/Features/Base/src/main/resources/images/GHIDRA_3.png?raw=true)
 ## Introduction
 
 **Write4** is the fourth challenge in the [ROP Emporium](https://ropemporium.com/) series. The goal is to call the function `print_file("flag.txt")`, but this time the string `"flag.txt"` is not present in the binary. We need to **write it into memory ourselves** before using it.
