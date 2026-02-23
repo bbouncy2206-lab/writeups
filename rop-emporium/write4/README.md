@@ -1,7 +1,8 @@
 
 # Write4 - ROP Emporium Walkthrough
 
-![ROP Emporium](https://github.com/NationalSecurityAgency/ghidra/blob/master/Ghidra/Features/Base/src/main/resources/images/GHIDRA_3.png?raw=true)
+![ROP Emporium]
+<a href="https://ropemporium.com/"><img src="0_ret2win/images/logo.jpg" alt="Logo" width="650"/></a>
 
 ## Introduction
 
