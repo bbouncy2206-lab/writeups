@@ -1,6 +1,6 @@
 # Write4 - ROP Emporium Walkthrough
 
-![ROP Emporium](https://en.wikipedia.org/wiki/Ghidra#/media/File:Ghidra_logo.svg)
+![ROP Emporium](https://github.com/NationalSecurityAgency/ghidra/blob/master/Ghidra/Features/Base/src/main/resources/images/GHIDRA_3.png?raw=true)
 
 ## Introduction
 
@@ -281,4 +281,4 @@ The next challenge, **badchars**, adds a difficulty: forbidden characters! But w
 
 ---
 
-*Happy hacking!* 🚀
+*scaramouch* 
