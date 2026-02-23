@@ -3,7 +3,7 @@
 
 Link: https://ropemporium.com/
 
-<a href="https://ropemporium.com/"><img src="0_ret2win/images/logo.jpg" alt="Logo" width="650"/></a>
+https://images.squarespace-cdn.com/content/v1/63cfe3238ae54d2a38ff6bad/4459abbb-00cd-466c-9311-32b53fdb2961/PWN2OWN-Icon-Reverse-3C-large.png
 
 ## Introduction
 
