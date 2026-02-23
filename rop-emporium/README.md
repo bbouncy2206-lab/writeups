@@ -42,4 +42,4 @@ ret2csu
 
 ---
 
-[🏠 Home](../README.md)
+[ Home](../README.md)
