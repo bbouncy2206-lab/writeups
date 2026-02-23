@@ -1,6 +1,6 @@
 # Write4 - ROP Emporium Walkthrough
 
-![ROP Emporium](https://www.google.com/imgres?q=ghidra%20logo&imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fa%2Fa3%2FGhidra_Logo.png&imgrefurl=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3AGhidra_Logo.png&docid=B4Qyg7npAsGPLM&tbnid=YgTParbWsFKq6M&vet=12ahUKEwjC-7TU5u6SAxVa_rsIHUpwK1UQnPAOegQIGBAB..i&w=600&h=600&hcb=2&ved=2ahUKEwjC-7TU5u6SAxVa_rsIHUpwK1UQnPAOegQIGBAB)
+![ROP Emporium](https://en.wikipedia.org/wiki/Ghidra#/media/File:Ghidra_logo.svg)
 
 ## Introduction
 
