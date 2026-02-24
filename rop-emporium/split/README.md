@@ -1,5 +1,7 @@
 # Split - ROP Emporium Challenge Writeup
 
+![ROP Emporium](https://pwndbg.re/stable/assets/logo2.png)
+
 ## Challenge Description
 
 **Binary:** `split` (64-bit ELF)
