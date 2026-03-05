@@ -82,29 +82,6 @@ git clone https://github.com/hugsy/gef
 - **[Compiler Explorer](https://godbolt.org/)** - Voir C → ASM en direct
 - **[Python Tutor](https://pythontutor.com/)** - Visualise l'exécution
 
-##  **PLAN D'ENTRAÎNEMENT QUOTIDIEN**
-
-### **Matin (30 min)**
-```bash
-# Lis un binaire simple
-gdb ./simple
-disas main
-x/10i main
-```
-
-### **Midi (30 min)**
-```bash
-# Fais un défi sur crackmes.one
-# Prends un "easy" et reverse-le
-```
-
-### **Soir (1 heure)**
-```bash
-# Étudie un concept spécifique
-# Ex: comment fonctionne call/ret
-# Écris ton propre programme ASM
-```
-
 ## **PROJETS PRATIQUES**
 
 ### **Niveau 1: Écris ces programmes en ASM**
